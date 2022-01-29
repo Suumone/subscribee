@@ -1,4 +1,4 @@
-package com.professional.subscribee.graphql.User;
+package com.professional.subscribee.graphql;
 
 import com.professional.subscribee.model.User;
 import com.professional.subscribee.service.UserService;
@@ -20,5 +20,4 @@ public class UserQuery implements GraphQLQueryResolver {
     public User getUser(Long id){
         return userService.getUser(id);
     }
-
 }

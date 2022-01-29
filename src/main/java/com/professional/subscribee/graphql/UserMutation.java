@@ -1,4 +1,4 @@
-package com.professional.subscribee.graphql.User;
+package com.professional.subscribee.graphql;
 
 
 import com.professional.subscribee.model.User;
@@ -14,5 +14,10 @@ public class UserMutation implements GraphQLMutationResolver {
 
     public User createUser(String username, String password, String phone, String email) {
         return userService.createUser(username, password, phone, email);
+    }
+
+    public boolean deleteUser(long id){
+        userService.deleteUser(id);
+        return true;
     }
 }

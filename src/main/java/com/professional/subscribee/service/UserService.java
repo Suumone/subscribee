@@ -12,7 +12,6 @@ import java.util.List;
 public class UserService {
     private final UserRepo userRepo;
 
-    //@Transactional(readOnly = true)
     public List<User> findAllUsers() {
         return userRepo.findAll();
     }
@@ -21,17 +20,6 @@ public class UserService {
         return userRepo.getById(id);
     }
 
-    //@Transactional
-    public void createUser(User user) {
-        userRepo.save(user);
-    }
-
-    //@Transactional
-    public void updateUser(User user) {
-        userRepo.save(user);
-    }
-
-    //@Transactional
     public void deleteUser(long userId) {
         userRepo.deleteById(userId);
     }

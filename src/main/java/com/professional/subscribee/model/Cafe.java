@@ -5,22 +5,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
 @Entity
-@Table
 @AllArgsConstructor
 @NoArgsConstructor
-public class Organization {
+public class Cafe {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank(message = "Username should not be empty")
-    private String orgName;
+    @NotBlank(message = "Name should not be empty")
+    private String name;
     @NotBlank(message = "Password should not be empty")
+    private String password;
     private String phone;
-    @Email
     private String email;
+    @Column(length = 4000)
+    private String description;
+    @Column(columnDefinition = "boolean default false")
+    private boolean deleted = false;
 }

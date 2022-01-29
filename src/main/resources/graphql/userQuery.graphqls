@@ -1,9 +1,13 @@
+scalar DateTime
+
 type User {
 	id: ID!,
 	username: String,
 	password: String,
 	phone: String,
 	email: String,
+	createdDateTime: DateTime
+	confirmed: Boolean
 }
 
 type Query {
@@ -13,4 +17,5 @@ type Query {
 
 type Mutation {
 	createUser(username: String!, password: String!, phone: String, email: String): User
+	deleteUser(id: ID!): Boolean
 }

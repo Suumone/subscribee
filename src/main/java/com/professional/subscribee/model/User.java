@@ -5,8 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.time.OffsetDateTime;
 
 @Data
 @Entity
@@ -18,12 +18,15 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @NotBlank(message = "Username should not be empty")
+    @Column(unique = true)
     private String username;
     @NotBlank(message = "Password should not be empty")
     private String password;
     private String phone;
-    @Email
     private String email;
+    private final OffsetDateTime createdDateTime = OffsetDateTime.now();
+    @Column(columnDefinition = "boolean default false")
+    private boolean confirmed = false;
 
     public User(String username, String password, String phone, String email) {
         this.username = username;
