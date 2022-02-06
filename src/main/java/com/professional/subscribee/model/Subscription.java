@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.OffsetDateTime;
 
 @Data
 @Entity
@@ -17,5 +18,7 @@ public class Subscription {
     @Column(length = 4000)
     private String description;
     private String cost;
-    private String period;
+    private int periodDays;
+    @Column(updatable = false)
+    private OffsetDateTime createdDateTime = OffsetDateTime.now();
 }

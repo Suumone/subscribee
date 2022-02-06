@@ -1,21 +1,40 @@
 scalar DateTime
 
+type Role {
+	id: ID!,
+	roleName: String
+}
+
+type Cafe {
+	id: ID!,
+	name: String,
+	phone: String,
+	description: String
+}
+
 type User {
 	id: ID!,
-	username: String,
+	firstName: String,
+	lastName: String,
 	password: String,
 	phone: String,
 	email: String,
-	createdDateTime: DateTime
-	confirmed: Boolean
+	createdDateTime: DateTime,
+	confirmed: Boolean,
+	role: Role,
+	cafeWork: Cafe
 }
 
 type Query {
 	users: [User!]!
 	user(id: ID): User
+	getUserFromJwtToken(token: String!): User
+	login(phone: String!, password: String!): String
 }
 
 type Mutation {
-	createUser(username: String!, password: String!, phone: String, email: String): User
-	deleteUser(id: ID!): Boolean
+    createUser(phone: String!, password: String!): User
+    deleteUser(id: ID!): Boolean
+	createCafe(name: String, phone: String, description: String): Cafe
+	subscribeUser(userPhone: String!, subscriptionId: ID!): Boolean
 }
