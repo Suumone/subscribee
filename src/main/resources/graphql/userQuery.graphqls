@@ -28,7 +28,7 @@ type User {
 type Query {
 	users: [User!]!
 	user(id: ID): User
-	getUserFromJwtToken(token: String!): User
+	getUserFromAccessToken(token: String!): User
 	login(phone: String!, password: String!): String
 }
 
@@ -36,5 +36,5 @@ type Mutation {
     createUser(phone: String!, password: String!): User
     deleteUser(id: ID!): Boolean
 	createCafe(name: String, phone: String, description: String): Cafe
-	subscribeUser(userPhone: String!, subscriptionId: ID!): Boolean
+	subscribeUser(accessToken: String!, subscriptionId: ID!): Boolean
 }

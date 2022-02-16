@@ -39,6 +39,11 @@ dependencies {
 	implementation group: 'com.graphql-java-kickstart', name: 'voyager-spring-boot-starter', version: '11.0.0'
 	implementation group: 'com.graphql-java', name: 'graphql-java-extended-scalars', version: '16.0.1'
 
+	implementation group: 'com.google.zxing', name: 'core', version: '3.4.1'
+	implementation group: 'com.google.zxing', name: 'javase', version: '3.4.1'
+	implementation group: 'org.json', name: 'json', version: '20211205'
+	implementation group: 'org.springframework.security.oauth.boot', name: 'spring-security-oauth2-autoconfigure', version: '2.6.3'
+
 	testImplementation 'com.graphql-java-kickstart:graphql-spring-boot-starter-test:12.0.0'
 }
 

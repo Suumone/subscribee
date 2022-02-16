@@ -4,28 +4,18 @@ import com.professional.subscribee.model.User;
 import com.professional.subscribee.repository.RoleRepository;
 import com.professional.subscribee.repository.UserRepo;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @AllArgsConstructor
+@Slf4j
 public class UserService {
     private final UserRepo userRepo;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final RoleRepository roleRepository;
-
-    @Transactional(readOnly = true)
-    public List<User> findAllUsers() {
-        return userRepo.findAll();
-    }
-
-    @Transactional(readOnly = true)
-    public User getUser(Long id) {
-        return userRepo.getById(id);
-    }
 
     @Transactional
     public void deleteUser(long userId) {
@@ -42,7 +32,9 @@ public class UserService {
                 .email(email)
                 .build();
         user.setRole(roleRepository.findByRoleName("USER"));
-        return userRepo.save(user);
+        userRepo.save(user);
+        log.trace("User created(phone:{}, firstName:{}, lastName:{}, email:{})", phone, firstName, lastName, email);
+        return user;
     }
 
     @Transactional
@@ -52,10 +44,9 @@ public class UserService {
                 .phone(phone)
                 .build();
         user.setRole(roleRepository.findByRoleName("USER"));
-        return userRepo.save(user);
+        userRepo.save(user);
+        log.trace("User created(phone:{})", phone);
+        return user;
     }
 
-    public User findByPhone(String phone) {
-        return userRepo.findByPhone(phone);
-    }
 }

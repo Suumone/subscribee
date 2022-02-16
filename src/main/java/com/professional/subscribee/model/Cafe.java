@@ -24,8 +24,10 @@ public class Cafe {
     private String email;
     @Column(length = 4000)
     private String description;
+    @Builder.Default
     @Column(columnDefinition = "boolean default false")
     private boolean deleted = false;
+    @Builder.Default
     @Column(updatable = false)
     private OffsetDateTime createdDateTime = OffsetDateTime.now();
 }

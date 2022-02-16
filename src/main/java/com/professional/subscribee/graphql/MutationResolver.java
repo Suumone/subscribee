@@ -30,7 +30,7 @@ public class MutationResolver implements GraphQLMutationResolver {
         return cafeService.createCafe(phone, password, description);
     }
 
-    public boolean subscribeUser(String userPhone, long subscriptionId){
-        return userSubscriptionsService.subscribeUser(userPhone, subscriptionId);
+    public boolean subscribeUser(String accessToken, long subscriptionId){
+        return userSubscriptionsService.subscribeUser(accessToken, subscriptionId);
     }
 }

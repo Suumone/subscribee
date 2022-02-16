@@ -38,11 +38,13 @@ public class User implements UserDetails {
 
     private String email;
 
+    @Builder.Default
     @Column(updatable = false)
     private OffsetDateTime createdDateTime = OffsetDateTime.now();
 
     @Column(columnDefinition = "boolean default false")
-    private boolean confirmed = false;
+    @Builder.Default
+    private boolean confirmed = true;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role;

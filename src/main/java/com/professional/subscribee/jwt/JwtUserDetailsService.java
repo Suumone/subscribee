@@ -1,7 +1,7 @@
 package com.professional.subscribee.jwt;
 
 import com.professional.subscribee.model.User;
-import com.professional.subscribee.service.UserService;
+import com.professional.subscribee.repository.UserRepo;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -11,10 +11,10 @@ import org.springframework.stereotype.Service;
 @Service
 @Lazy
 public class JwtUserDetailsService implements UserDetailsService {
-    private final UserService userService;
+    private final UserRepo userRepo;
 
-    public JwtUserDetailsService(@Lazy UserService userService) {
-        this.userService = userService;
+    public JwtUserDetailsService(@Lazy UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
     @Override
@@ -23,7 +23,7 @@ public class JwtUserDetailsService implements UserDetailsService {
     }
 
     public UserDetails loadUserByPhone(String phone) throws UsernameNotFoundException {
-        User user = userService.findByPhone(phone);
+        User user = userRepo.findByPhone(phone);
 
         if (user == null) {
             throw new UsernameNotFoundException("Username with phone: " + phone + "not found");

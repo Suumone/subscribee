@@ -8,23 +8,25 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.OffsetDateTime;
 
-@Data
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Builder
-public class UserSubscriptions {
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserSubscriptionConfirm {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    private Subscription subscription;
-    private int cupsQty;
-    private OffsetDateTime startDate;
-    private OffsetDateTime endDate;
-    @Builder.Default
-    @Column(columnDefinition = "boolean default false")
-    private boolean confirmed = false;
+    private Cafe confirmingCafe;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private UserSubscriptions userSubscriptions;
+
+    private OffsetDateTime startConfirmDate;
+    private OffsetDateTime endConfirmDate;
 }

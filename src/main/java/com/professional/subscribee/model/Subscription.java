@@ -18,7 +18,11 @@ public class Subscription {
     @Column(length = 4000)
     private String description;
     private String cost;
+    private int initCupsQty;
     private int periodDays;
     @Column(updatable = false)
     private OffsetDateTime createdDateTime = OffsetDateTime.now();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cafe cafe;
 }
