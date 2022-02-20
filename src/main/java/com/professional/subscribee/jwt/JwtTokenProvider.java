@@ -1,5 +1,6 @@
 package com.professional.subscribee.jwt;
 
+import com.professional.subscribee.model.AccessToken;
 import com.professional.subscribee.model.Role;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -35,16 +36,16 @@ public class JwtTokenProvider {
         this.jwtExpirationInMillis = jwtExpirationInMillis;
     }
 
-    public String createToken(String phone, Role role) {
+    public AccessToken createToken(String phone, Role role) {
         Claims claims = Jwts.claims().setSubject(phone);
         claims.put("role", role.getRoleName());
-
-        return Jwts.builder()
+        String token = Jwts.builder()
                 .setClaims(claims)
                 .signWith(Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)))
                 .setIssuedAt(from(Instant.now()))
                 .setExpiration(from(Instant.now().plusMillis(jwtExpirationInMillis)))
                 .compact();
+        return new AccessToken(token);
     }
 
     public Authentication getAuthentication(String token) {

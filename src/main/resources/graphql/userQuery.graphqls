@@ -12,6 +12,10 @@ type Cafe {
 	description: String
 }
 
+type accessToken {
+	accessToken: String!
+}
+
 type User {
 	id: ID!,
 	firstName: String,
@@ -29,7 +33,6 @@ type Query {
 	users: [User!]!
 	user(id: ID): User
 	getUserFromAccessToken(token: String!): User
-	login(phone: String!, password: String!): String
 }
 
 type Mutation {
@@ -37,4 +40,5 @@ type Mutation {
     deleteUser(id: ID!): Boolean
 	createCafe(name: String, phone: String, description: String): Cafe
 	subscribeUser(accessToken: String!, subscriptionId: ID!): Boolean
+	login(phone: String!, password: String!): accessToken
 }
